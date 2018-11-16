@@ -34,16 +34,40 @@ def run():
   nb_model.fit(X_train, y_train)
 
   # make predictions
-  y_pred_svm = svm_model.predict(X_test)
-  y_pred_nb = nb_model.predict(X_test)
+  #y_pred_svm = svm_model.predict(X_test)
+  #y_pred_nb = nb_model.predict(X_test)
 
   # can update results based on what we want
   # confusion matrix: 0,0 - true negatives, 0,1 - false positives, 1,0 - false negatives, 1,1true positives
-  print 'SVM\n'
-  print(confusion_matrix(y_test,y_pred_svm))
-  print(classification_report(y_test,y_pred_svm))
-  print 'Naive Bayes\n'
-  print(confusion_matrix(y_test,y_pred_nb))
-  print(classification_report(y_test,y_pred_nb))
+  #print 'SVM\n'
+  #print(confusion_matrix(y_test,y_pred_svm))
+  #print(classification_report(y_test,y_pred_svm))
+  #print 'Naive Bayes\n'
+  #print(confusion_matrix(y_test,y_pred_nb))
+  #print(classification_report(y_test,y_pred_nb))
 
-run()
+  X_validation, X_finalTest, y_validation, y_finalTest = train_test_split(X_test, y_test, test_size = 0.50)
+    
+  score1 = svm_model.score(X_validation,y_validation)
+  score2 = nb_model.score(X_validation ,y_validation)
+    
+    
+    
+  y_pred_final = 0.019378
+    
+  if ( score1 > score2 ):
+    y_pred_final = svm_model.predict(X_finalTest)
+    
+  else:
+    y_pred_final = nb_model.predict(X_finalTest)
+    
+    
+  #print ("y_pred_final:")
+  #print (y_pred_final)
+    
+  print(confusion_matrix(y_finalTest,y_pred_final))
+    
+  print(classification_report(y_finalTest,y_pred_final))
+    
+
+  run()
