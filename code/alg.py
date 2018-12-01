@@ -57,9 +57,11 @@ def run():
     
   if ( score1 > score2 ):
     y_pred_final = svm_model.predict(X_finalTest)
+    print '\nSVM\n'
     
   else:
     y_pred_final = nb_model.predict(X_finalTest)
+    print '\nNaive Bayes\n'
     
     
   #print ("y_pred_final:")
@@ -70,4 +72,4 @@ def run():
   print(classification_report(y_finalTest,y_pred_final))
     
 
-  run()
+run()
